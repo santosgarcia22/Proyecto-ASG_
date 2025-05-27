@@ -40,6 +40,31 @@
                     </ul>
                  </li>
                 @endcan
+                <!--ACCESOS-->
+                @can('sidebar.roles.y.permisos')
+                 <li class="nav-item">
+
+                     <a href="#" class="nav-link nav-">
+                        <i class="far fa-edit"></i>
+                        <p>
+                            Control de Acceso 
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.accesos.index') }}" target="frameprincipal" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Acceso</p>
+                            </a>
+                        </li>
+
+                        
+
+                    </ul>
+                 </li>
+                @endcan
 
 
 

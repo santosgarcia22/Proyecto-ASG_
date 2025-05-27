@@ -8,7 +8,8 @@ use App\Http\Controllers\Backend\Roles\PermisoController;
 use App\Http\Controllers\Backend\Perfil\PerfilController;
 use App\Http\Controllers\Backend\Configuracion\ConfiguracionController;
 use App\Http\Controllers\Backend\Registro\RegistroController;
-
+use App\Http\Controllers\Frontend\AccesoController;
+use App\Http\Controllers\AccesoFrontendController;
 
 
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
@@ -24,6 +25,9 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.lo
 // --- CONTROL WEB ---
 
 Route::get('/panel', [ControlController::class,'indexRedireccionamiento'])->name('admin.panel');
+// --- ACCESOS ---
+Route::get('/admin/accesos/index', [AccesoFrontendController::class, 'index'])->name('admin.accesos.index');
+
 
 // --- ROLES ---
 
@@ -58,3 +62,13 @@ Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
 
 
+// RUTAS DE ACCESO 
+
+
+// Route::get('/', function(){
+//     return view('home');
+// });
+
+// return view('acceso/show', function () {
+//     return view('acceso/show');
+// });
