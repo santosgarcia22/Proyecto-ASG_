@@ -13,5 +13,4 @@ class vuelo extends Model
     protected $primarykey = 'id_vuelo'; // llave primaria
     protected $fillable = ['fecha','numero_vuelo']; //datos para asigancion de forma masiva
 
-
 }

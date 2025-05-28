@@ -11,6 +11,6 @@ class acceso extends Model
 
     protected $table = 'acceso'; //tabla
     protected $primarykey = 'numero_id'; // llave primaria
-    protected $fillable = ['nombre','tipo', 'posicion', 'ingreso', 'salida', 'Sincronizacion', 'id', 'objeto', 'vuelo']; //datos para asigancion de forma masiva
+    protected $fillable = ['nombre','tipo', 'posicion', 'ingreso', 'salida', 'Sicronizacion', 'id', 'objetos', 'vuelo']; //datos para asigancion de forma masiva
     
 }

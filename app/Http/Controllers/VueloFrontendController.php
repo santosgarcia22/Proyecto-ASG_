@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\vuelo;
 
 class VueloFrontendController extends Controller
 {
@@ -12,6 +13,14 @@ class VueloFrontendController extends Controller
     public function index()
     {
         //
+
+         $vuelo = vuelo::select(
+           "vuelo.id_vuelo",
+           "vuelo.fecha",
+           "vuelo.numero_vuelo"
+        )->get();
+        
+       return view('/vuelo/show')->with(['vuelo' => $vuelo]);
     }
 
     /**
