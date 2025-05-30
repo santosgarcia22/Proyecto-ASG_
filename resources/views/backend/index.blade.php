@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Panel</title>
 
-    <link href="{{ asset('images/logo.png') }}" rel="icon">
+    <link href="{{ asset('images/Airsecurity.png') }}" rel="icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -31,7 +31,8 @@
     <div class="content-wrapper" style=" background-color: #fff;">
         <!-- redireccionamiento de vista -->
 
-        <iframe style="width: 100%; resize: initial; overflow: hidden; min-height: 96vh" frameborder="0"  scrolling="" id="frameprincipal" src="{{ route($ruta) }}" name="frameprincipal">
+        <iframe style="width: 100%; resize: initial; overflow: hidden; min-height: 96vh"
+         frameborder="0"  scrolling="" id="frameprincipal" src="{{ route($ruta) }}" name="frameprincipal">
         </iframe>
 
     </div>

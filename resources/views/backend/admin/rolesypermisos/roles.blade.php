@@ -11,8 +11,19 @@
     table{
         /*Ajustar tablas*/
         table-layout:fixed;
+
+        
     }
-</style>
+
+    /* COLOR  DE LA LISTA DE ROL Y PERMISO */
+        .card-success > .card-header {
+            background: rgb(57, 155, 255) !important;
+            color: #fff !important;
+            border-radius: 8px 8px 0 0;
+        }
+        
+
+    </style>
 
 <div id="divcontenedor" style="display: none">
     <section class="content-header">
@@ -22,12 +33,12 @@
             </div>
             <br>
 
-            <button type="button" style="font-weight: bold; background-color: #28a745; color: white !important;" value="Nuevo Rol" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
+            <button type="button" style="font-weight: bold; background-color:rgb(80, 163, 232); color: white !important;" value="Nuevo Rol" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
                 <i class="fas fa-edit"></i>
                 Nuevo Rol
             </button>
 
-            <button type="button" style="font-weight: bold; background-color: #28a745; color: white !important;" 
+            <button type="button" style="font-weight: bold; background-color:rgb(41, 127, 207); color: white !important;" 
             value="Lista de Permisos" onclick="vistaPermisos()" class="button button-3d button-rounded button-pill button-small">
                 <i class="fas fa-list-alt"></i>
                 Lista de Permisos
@@ -264,11 +275,6 @@
                     toastr.error('Error al guardar');
                 });
         }
-
-
-
-
-
 
     </script>
 

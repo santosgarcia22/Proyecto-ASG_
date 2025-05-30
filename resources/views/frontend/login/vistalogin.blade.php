@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/login/bootstrap.min.css') }}">
 
     <!-- icono del sistema -->
-    <link href="{{ asset('images/icono-sistemalogo.png') }}" rel="icon">
+    <link href="{{ asset('images/Airsecurity.png') }}" rel="icon">
     <!-- libreria -->
     <link href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}" type="text/css" rel="stylesheet" />
 
@@ -20,80 +20,141 @@
     <link href="{{ asset('css/buttons_estilo.css') }}" rel="stylesheet">
 
 
-    <style>
-        html, body {
-            height: 100%;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-image: url({{ asset('images/fondo3.jpg') }});
-        }
+   <style>
+    body, html {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e293b 0%, #0a192f 100%);
+        font-family: 'Roboto', sans-serif;
+    }
+    .login-overlay {
+        min-height: 100vh;
+        background: rgba(30, 41, 59, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .login-card {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 40px rgba(30,41,59,0.22), 0 2px 4px rgba(0,0,0,0.03);
+        padding: 48px 36px 36px 36px;
+        width: 100%;
+        max-width: 380px;
+        position: relative;
+        animation: fadeInDown 1s;
+    }
+    @keyframes fadeInDown {
+        from { transform: translateY(-40px); opacity: 0;}
+        to   { transform: translateY(0); opacity: 1;}
+    }
+    .login-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .login-logo img {
+        width: 250px;
+        border-radius: 18px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        background: #fff;
+        padding: 10px;
+    }
+    .login-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: center;
+        margin-bottom: 6px;
+        margin-top: 18px;
+        letter-spacing: 2px;
+    }
+    .login-subtitle {
+        font-size: 1.04rem;
+        font-weight: 500;
+        color: #6c757d;
+        text-align: center;
+        margin-bottom: 28px;
+        letter-spacing: 1px;
+    }
+    .form-label {
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 3px;
+        letter-spacing: .5px;
+        padding: 0 0 0 50px;
+    }
+    .form-control-lg {
+        border-radius: 12px;
+        font-size: 1.02rem;
+        padding: 20px 16px;
+        margin-bottom: 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+    }
+    .form-control-lg:focus {
+        box-shadow: 0 0 0 2px #2563eb22;
+        border-color: #2563eb;
+        background: #fff;
+    }
+    .input-group-text {
+        background: transparent;
+        border: none;
+        color: #2563eb;
+        font-size: 1.16rem;
+        padding-right: 0;
+    }
+    .btn-login {
+        width: 100%;
+        padding: 12px 0;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1.06rem;
+        letter-spacing: 1.5px;
+        background: linear-gradient(90deg, #2563eb 60%, #38bdf8 100%);
+        color: #fff;
+        border: none;
+        box-shadow: 0 3px 12px rgba(30,41,59,0.10);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-login:hover, .btn-login:focus {
+        background: linear-gradient(90deg, #1e40af 60%, #0ea5e9 100%);
+        box-shadow: 0 8px 24px rgba(30,41,59,0.15);
+        color: #fff;
+    }
+    @media (max-width: 540px) {
+        .login-card { padding: 28px 8px 24px 8px;}
+    }
 
-        .demo-container {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .btn-lg {
-            padding: 12px 26px;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        ::placeholder {
-            font-size:14px;
-            letter-spacing:0.5px;
-        }
-
-        .form-control-lg {
-            font-size: 16px;
-            padding: 25px 20px;
-        }
-        .font-500{
-            font-weight:500;
-        }
-        .image-size-small{
-            width:200px;
-            margin:0 auto;
-        }
-        .image-size-small img{
-            width:200px;
-            margin-bottom:-70px;
-        }
-    </style>
+    .input-group-text{
+        margin: 8px;
+    }
+</style>
 </head>
 
 <body>
-<div class="container">
-    <div>
-        <div class="demo-container" style="margin-top: 30px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-12 mx-auto">
-
-                        <div class="p-5 bg-white rounded shadow-lg">
-                            <div class="text-center image-size-small position-relative">
-                                <img src="{{ asset('images/logo.png') }}" class=" p-2">
-                            </div>
-                            <h3 class="mb-2 text-center pt-5"><strong>&nbsp;</strong></h3>
-                            <p class="text-center lead" style="font-weight: bold">BASE</p>
-                            <form>
-                                <label style="margin-top: 10px" class="font-500">Usuario</label>
-                                <input class="form-control form-control-lg mb-3" id="usuario" autocomplete="off" type="text">
-                                <label class="font-500">Contraseña</label>
-                                <input class="form-control form-control-lg" id="password" type="password">
-
-                                <input type="button" value="ACCEDER" style="margin-top: 25px; width: 100%; font-weight: bold" onclick="login()" class="button button-uppercase button-primary button-pill">
-                            </form>
-                        </div>
-                    </div>
-                </div>
+ <div class="login-overlay">
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="{{ asset('images/Airsecurity.png') }}" alt="Logo AirSecurity">
             </div>
+            <div class="login-title">Panel de Acceso</div>
+            <div class="login-subtitle">Inicia sesión para continuar</div>
+            <form autocomplete="off">
+                <label for="usuario" class="form-label">Usuario</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input class="form-control form-control-lg" id="usuario" type="text" autocomplete="off" placeholder="Nombre de usuario">
+                </div>
+                <label for="password" class="form-label">Contraseña</label>
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input class="form-control form-control-lg" id="password" type="password" placeholder="Ingresa tu contraseña">
+                </div>
+                <button type="button" onclick="login()" class="btn btn-login mt-4">ACCEDER</button>
+            </form>
         </div>
     </div>
-</div>
 
 <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/toastr.min.js') }}" type="text/javascript"></script>
@@ -103,83 +164,66 @@
 
 
 <script type="text/javascript">
-
-    // onkey Enter
-    var input = document.getElementById("password");
-    input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            login();
+        // onkey Enter
+        var input = document.getElementById("password");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                login();
+            }
+        });
+        // inicio de sesion
+        function login() {
+            var usuario = document.getElementById('usuario').value;
+            var password = document.getElementById('password').value;
+            if(usuario === ''){
+                toastr.error('Usuario es requerido');
+                return;
+            }
+            if(password === ''){
+                toastr.error('Contraseña es requerida');
+                return;
+            }
+            openLoading();
+            let formData = new FormData();
+            formData.append('usuario', usuario);
+            formData.append('password', password);
+            axios.post('/admin/login', formData, {})
+                .then((response) => {
+                    closeLoading();
+                    verificar(response);
+                })
+                .catch((error) => {
+                    toastr.error('error al iniciar sesión');
+                    closeLoading();
+                });
         }
-    });
-
-    // inicio de sesion
-    function login() {
-
-        var usuario = document.getElementById('usuario').value;
-        var password = document.getElementById('password').value;
-
-        if(usuario === ''){
-            toastr.error('Usuario es requerido');
-            return;
+        // estados de la verificacion
+        function verificar(response) {
+            if (response.data.success === 0) {
+                toastr.error('Validación incorrecta')
+            } else if (response.data.success === 1) {
+                window.location = response.data.ruta;
+            } else if (response.data.success === 2) {
+                toastr.error('Contraseña incorrecta');
+            } else if (response.data.success === 3) {
+                toastr.error('Usuario no encontrado')
+            } else if (response.data.success === 5) {
+                Swal.fire({
+                    title: 'Usuario Bloqueado',
+                    text: "Contactar a la administración",
+                    icon: 'info',
+                    showCancelButton: false,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar',
+                }).then((result) => {});
+            }
+            else {
+                toastr.error('Error al iniciar sesión');
+            }
         }
-
-        if(password === ''){
-            toastr.error('Contraseña es requerida');
-            return;
-        }
-
-        openLoading();
-
-        let formData = new FormData();
-        formData.append('usuario', usuario);
-        formData.append('password', password);
-
-        axios.post('/admin/login', formData, {
-        })
-            .then((response) => {
-                closeLoading();
-                verificar(response);
-            })
-            .catch((error) => {
-                toastr.error('error al iniciar sesión');
-                closeLoading();
-            });
-    }
-
-    // estados de la verificacion
-    function verificar(response) {
-
-        if (response.data.success === 0) {
-            toastr.error('Validación incorrecta')
-        } else if (response.data.success === 1) {
-            window.location = response.data.ruta;
-        } else if (response.data.success === 2) {
-            toastr.error('Contraseña incorrecta');
-        } else if (response.data.success === 3) {
-            toastr.error('Usuario no encontrado')
-        } else if (response.data.success === 5) {
-            Swal.fire({
-                title: 'Usuario Bloqueado',
-                text: "Contactar a la administración",
-                icon: 'info',
-                showCancelButton: false,
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-
-                }
-            })
-        }
-        else {
-            toastr.error('Error al iniciar sesión');
-        }
-    }
-
-
-</script>
+    </script>
 </body>
 
 </html>

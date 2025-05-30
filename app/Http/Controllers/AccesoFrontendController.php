@@ -30,7 +30,9 @@ class AccesoFrontendController extends Controller
         
 
 
-        return view('/acceso/show')->with(['acceso'=>$acceso]); 
+            $acceso = acceso::paginate(5); // Puedes cambiar 10 por el número de registros por página
+            return view('acceso.show')->with('acceso', $acceso);
+
     }
 
     /**
@@ -87,17 +89,20 @@ class AccesoFrontendController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(acceso $access)
+   public function edit(acceso $acceso)
     {
-        //listar marcas para llenar select
+
+        // $acceso = acceso::where('numero_id', $numero_id)->first();
+
         $vuelos = vuelo::all();
-        //mostrar vista update.blade.php junto al listado de vuelo
-        view('acceso/update')->with(['acceso'=>$access,'vuelo'=>$vuelos]);
+        return view('/acceso/update')->with(['acceso' => $acceso, 'vuelo' => $vuelos]);
     }
+
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, acceso $access)
+    public function update(Request $request, acceso $acceso)
     {
         //validar campos
         $data = request()->validate([
@@ -109,40 +114,38 @@ class AccesoFrontendController extends Controller
            'Sicronizacion'=> 'required',
            'id'=> 'required',
            'objetos'=> 'required',
-           'numero_vuelo'=> 'required'
+           'vuelo'=> 'required'
         ]);
         //remplazar datos anteriosres por los nuevos
-        $access->nombre =$data['nombre'];
-        $access->tipo =$data['tipo'];
-        $access->posicion =$data['posicion'];
-        $access->ingreso =$data['ingreso'];
-        $access->salida =$data['salida'];
-        $access->Sincronizacion =$data['Sincronizacion'];
-        $access->id =$data['id'];
-        $access->objetos =$data['objetos'];
-        $access->numero_vuelo =$data['numero_vuelo'];
-
-        $access->update_at = now();
-
+        $acceso->nombre =$data['nombre'];
+        $acceso->tipo =$data['tipo'];
+        $acceso->posicion =$data['posicion'];
+        $acceso->ingreso =$data['ingreso'];
+        $acceso->salida =$data['salida'];
+        $acceso->Sicronizacion =$data['Sicronizacion'];
+        $acceso->id =$data['id'];
+        $acceso->objetos =$data['objetos'];
+        $acceso->vuelo =$data['vuelo'];
+        $acceso->update_at = now();
         // Enviar a guardar la actualizacion
-        $access->save();
-
+        $acceso->save();
         //redireccionar
-
         return redirect('acceso/show');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+  public function destroy($id)
     {
-        // Eliminar el producto con el id recibido
+        $registro = acceso::where('numero_id', $id)->first();
 
-        acceso::destroy($id);
+        if ($registro) {
+            $registro->delete();
+            return redirect()->route('admin.accesos.show')->with('mensaje', 'Registro eliminado exitosamente');
+        }
 
-        //retornar una respuesta json
-
-        return response()->json(array('res'=>true));
+        return redirect()->route('admin.accesos.show')->with('mensaje', 'No se encontró el registro');
     }
+
 }

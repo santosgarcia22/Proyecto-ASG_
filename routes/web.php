@@ -12,32 +12,29 @@ use App\Http\Controllers\Frontend\AccesoController;
 use App\Http\Controllers\AccesoFrontendController;
 use App\Http\Controllers\VueloFrontendController;
 
-
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
-
-
 // --- LOGIN ---
-
 Route::get('/', [LoginController::class,'index'])->name('login');
-
 Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-// --- CONTROL WEB ---
 
+// --- CONTROL WEB ---
 Route::get('/panel', [ControlController::class,'indexRedireccionamiento'])->name('admin.panel');
+Route::get('/admin/home', [ControlController::class, 'home'])->name('admin.home');
+
+
 // --- ACCESOS ---
 Route::get('/admin/accesos/index', [AccesoFrontendController::class, 'index'])->name('admin.accesos.index');
 Route::get('/admin/accesos/create', [AccesoFrontendController::class, 'create'])->name('admin.accesos.create');
 Route::post('/admin/acceso/store', [AccesoFrontendController::class, 'store'])->name('admin.accesos.store');
 Route::get('/admin/acceso/show', [AccesoFrontendController::class, 'index'])->name('admin.accesos.show');
+Route::get('/admin/acceso/edit/{acceso}', [AccesoFrontendController::class, 'edit'])->name('admin.accesos.edit');
+Route::put('/admin/acceso/update/{acceso}', [AccesoFrontendController::class, 'update'])->name('admin.accesos.update');
 
 
-
-
+Route::delete('/admin/acceso/{acceso}', [AccesoFrontendController::class, 'destroy'])->name('admin.accesos.destroy');
 Route::get('/admin/vuelos/index', [VueloFrontendController::class, 'index'])->name('admin.vuelo.index');
-
-
 // --- ROLES ---
 
 Route::get('/admin/roles/index', [RolesController::class,'index'])->name('admin.roles.index');
@@ -69,15 +66,3 @@ Route::post('/admin/editar-perfil/actualizar', [PerfilController::class, 'editar
 Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('no.permisos.index');
 
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
-
-
-// RUTAS DE ACCESO 
-
-
-// Route::get('/', function(){
-//     return view('home');
-// });
-
-// return view('acceso/show', function () {
-//     return view('acceso/show');
-// });

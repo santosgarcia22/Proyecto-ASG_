@@ -12,6 +12,12 @@
         /*Ajustar tablas*/
         table-layout:fixed;
     }
+      /* COLOR  DE LA LISTA DE ROL Y PERMISO */
+        .card-success > .card-header {
+            background: rgb(57, 155, 255) !important;
+            color: #fff !important;
+            border-radius: 8px 8px 0 0;
+        }
 </style>
 
 <div id="divcontenedor" style="display: none">
@@ -21,7 +27,7 @@
                 <h1>Todos los Permisos</h1>
             </div>
             <br>
-            <button type="button" style="font-weight: bold; background-color: #28a745; color: white !important;" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
+            <button type="button" style="font-weight: bold; background-color:rgb(46, 136, 214); color: white !important;" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
                 <i class="fas fa-pencil-alt"></i>
                 Agregar Permiso
             </button>

@@ -14,6 +14,11 @@
         /*Ajustar tablas*/
         table-layout:fixed;
     }
+    .card-primary:not(.card-outline) > .card-header {
+    background-color: #181818 !important; /* Negro puro */
+    color: #fff !important;               /* Letras blancas */
+}
+
 </style>
 
 <!-- Muestra una lista de permisos de un determinado Rol, para acceder aqui hay que seleccionar
@@ -25,16 +30,16 @@
             <h1>Lista de Permisos</h1>
         </div>
         <br>
-        <button type="button" style="font-weight: bold; background-color: #28a745; color: white !important;" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
+        <button type="button" style="font-weight: bold; background-color:rgb(202, 224, 229); color: white !important;" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
             <i class="fas fa-pencil-alt"></i>
             Agregar Permiso
         </button>
     </div>
 </section>
 
-<section class="content">
+<section #section class="content">
     <div class="container-fluid">
-        <div class="card card-success">
+        <div class="card card">
             <div class="card-header">
                 <h3 class="card-title">Lista</h3>
             </div>
@@ -237,3 +242,4 @@
 
 
 @stop
+
