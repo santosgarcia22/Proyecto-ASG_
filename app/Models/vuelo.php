@@ -10,7 +10,7 @@ class vuelo extends Model
     use HasFactory;
 
     protected $table = 'vuelo'; //tabla
-    protected $primarykey = 'id_vuelo'; // llave primaria
+ protected $primaryKey = 'id_vuelo'; // llave primaria
     protected $fillable = ['fecha','numero_vuelo']; //datos para asigancion de forma masiva
 
 }

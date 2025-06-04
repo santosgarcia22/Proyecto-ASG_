@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\vuelo;
+use Carbon\Carbon;
 
 class VueloFrontendController extends Controller
 {
@@ -29,6 +30,10 @@ class VueloFrontendController extends Controller
     public function create()
     {
         //
+            //    $vuelo = vuelo::all();
+
+        return view('/vuelo/create');
+
     }
 
     /**
@@ -36,7 +41,19 @@ class VueloFrontendController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validar campos
+
+        $data = request()->validate([
+            'fecha'=>'required',
+            'numero_vuelo'=>'required'
+        ]);
+
+        vuelo::create($data);
+        
+        //REDIRECCIONAR A LA VISTA SHOW
+
+        return redirect()->route('admin.vuelo.show');
+
     }
 
     /**
@@ -50,17 +67,29 @@ class VueloFrontendController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+   public function edit(vuelo $vuelo)
     {
-        //
+        return view('/vuelo/update', ['vuelo' => $vuelo]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, vuelo $vuelo)
     {
         //
+        $data = $request->validate([
+            'fecha' => 'required',
+            'numero_vuelo' => 'required'
+        ]);
+        $data['fecha']= Carbon::parse($data['fecha'])->format('Y-m-d H:i:s');
+        $vuelo->fecha = $data['fecha'];
+        $vuelo->numero_vuelo = $data['numero_vuelo'];
+        $vuelo->updated_at = now();
+        $vuelo->save();
+        return redirect()->route('admin.vuelo.show');
+
     }
 
     /**
@@ -69,5 +98,13 @@ class VueloFrontendController extends Controller
     public function destroy(string $id)
     {
         //
+        $registro = vuelo::where('id_vuelo', $id)->first();
+
+        if ($registro) {
+            $registro->delete();
+            return redirect()->route('admin.vuelo.show')->with('mensaje', 'Registro eliminado exitosamente');
+        }
+
+        return redirect()->route('admin.vuelo.show')->with('mensaje', 'No se encontró el registro');
     }
 }

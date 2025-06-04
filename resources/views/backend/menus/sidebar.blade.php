@@ -41,9 +41,9 @@
         }
         .brand-link img {
              /*  background: #e3e6ec;       Fondo blanco */
-            border-radius: 0px;      /* Bordes redondeados */
+            border-radius: 14px;      /* Bordes redondeados */
             padding: 6px;             /* Espacio interno */
-          /*   box-shadow: 0 1px 6px #0002;  Sombra suave opcional */
+           box-shadow: 0 10px 10px #0002;    /*Sombra suave opcional */
         }
             /* Cambiar color del texto de todo el sidebar */
             .main-sidebar, .sidebar {
@@ -53,7 +53,7 @@
                 color:rgb(236, 242, 248) !important;
             }
             .main-sidebar .nav-link:hover, .sidebar .nav-link:hover {
-                color:rgb(25, 65, 195) !important;
+                color:rgb(244, 111, 113) !important;
             }
 
 </style>

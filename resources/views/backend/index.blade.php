@@ -15,6 +15,8 @@
     <!-- Mensajes Toast -->
     <link href="{{ asset('css/toastr.min.css') }}" type="text/css" rel="stylesheet" />
     @yield('content-admin-css')
+
+    
 </head>
 
 

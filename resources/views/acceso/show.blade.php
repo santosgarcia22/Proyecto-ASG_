@@ -6,6 +6,40 @@
 <style>
 .content {
     padding: 10px;
+}
+
+@media (max-width: 576px) {
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 0.4rem;
+    }
+
+    /* Oculta columnas menos importantes en móvil */
+    .col-sincronizacion,
+    .col-usuario,
+    .col-objetos {
+        display: none;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 576px) {
+        td img {
+            max-width: 40px !important;
+            max-height: 40px !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .btn-text {
+            display: none;
+        }
+    }
 
 
 }
@@ -16,12 +50,27 @@
             <div class="col-12">
                 <div class="card shadow-sm">
                     <!-- Información del vuelo -->
+                    @if($numeroVuelo)
+                    <div class="alert alert-info mb-0">Mostrando accesos para el vuelo
+                        <strong>{{ $numeroVuelo }}</strong>
+                    </div>
+                    @endif
+
                     <div class="card-header bg-primary text-white">
                         <h1 class="h4">Información del vuelo</h1>
-                        @foreach($acceso as $key => $item)
-                        <h2 class="h6 mb-0">Número de vuelo: {{ $item->vuelo }}</h2>
-                        @break {{-- Solo mostramos uno, ya que puede estar repetido --}}
-                        @endforeach
+                        <form method="GET" action="{{ route('admin.accesos.index') }}" class="mb-0 d-inline">
+                            <label for="numero_vuelo" class="form-label mb-0">Número de vuelo:</label>
+                            <select name="numero_vuelo" id="numero_vuelo" class="form-select d-inline-block w-auto ms-2"
+                                onchange="this.form.submit()">
+                                <option value="">-- Todos --</option>
+                                @foreach($vuelos as $v)
+                                <option value="{{ $v->numero_vuelo }}"
+                                    {{ $numeroVuelo == $v->numero_vuelo ? 'selected' : '' }}>
+                                    {{ $v->numero_vuelo }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </form>
                     </div>
 
                     <div class="card-body table-responsive">
@@ -32,67 +81,68 @@
                         </div>
                         <br>
                         <br>
-                        <table id="tabla"
-                            class="table table-bordered table-striped table-hover text-center align-middle">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Tipo</th>
-                                    <th>Posición</th>
-                                    <th>Ingreso</th>
-                                    <th>Salida</th>
-                                    <th>Sincronización</th>
-                                    <th>Usuario</th>
-                                    <th>Objetos</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($acceso as $item)
-                                <tr>
-                                    <td>{{ $item->numero_id }}</td>
-                                    <td>{{ $item->nombre }}</td>
-                                    <td>{{ $item->tipo }}</td>
-                                    <td>{{ $item->posicion }}</td>
-                                    <td>{{ $item->ingreso }}</td>
-                                    <td>{{ $item->salida }}</td>
-                                    <td>{{ $item->Sicronizacion }}</td>
-
-                                    <td>{{ $item->id }}</td>
-                                    <td>
-                                        @if($item->objetos)
-                                        <img src="{{ asset('storage/objetos/' . basename($item->objetos)) }}" alt="Imagen" style="max-width: 80px; max-height: 80px; object-fit: cover;">
-
-                                        @else
-                                        <span class="text-muted">No hay imagen</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        <a href="{{ route('admin.accesos.edit', $item->numero_id) }}"
-                                            class="btn btn-sm btn-primary me-1">
-                                            <i class="bi bi-pencil-square"></i> Editar
-                                        </a>
-
-                                        <form action="{{ route('admin.accesos.destroy', $item->numero_id) }}"
-                                            method="POST" style="display: inline-block;"
-                                            onsubmit="return confirm('¿Estás seguro de eliminar este registro?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash"></i> Eliminar
-                                            </button>
-                                        </form>
-
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            {{ $acceso->links('pagination::bootstrap-5') }}
+                        <div class="table-responsive">
+                            <table
+                                class="table table-bordered table-striped table-hover align-middle table-responsive-sm table-responsive-md">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Tipo</th>
+                                        <th>Posición</th>
+                                        <th>Ingreso</th>
+                                        <th>Salida</th>
+                                        <th class="col-sincronizacion">Sincronización</th>
+                                        <th class="col-usuario">Usuario</th>
+                                        <th class="col-objetos">Objetos</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($acceso as $item)
+                                    <tr>
+                                        <td>{{ $item->numero_id }}</td>
+                                        <td>{{ $item->nombre }}</td>
+                                        <td>{{ $item->tipo }}</td>
+                                        <td>{{ $item->posicion }}</td>
+                                        <td>{{ $item->ingreso }}</td>
+                                        <td>{{ $item->salida }}</td>
+                                        <td class="col-sincronizacion">{{ $item->Sicronizacion }}</td>
+                                        <td class="col-usuario">{{ $item->id }}</td>
+                                        <td class="col-objetos">
+                                            @if($item->objetos)
+                                            <img src="{{ asset('storage/objetos/' . basename($item->objetos)) }}"
+                                                alt="Imagen"
+                                                style="max-width: 80px; max-height: 80px; object-fit: cover;">
+                                            @else
+                                            <span class="text-muted">No hay imagen</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.accesos.edit', $item->numero_id) }}"
+                                                class="btn btn-sm btn-primary me-1">
+                                                <i class="bi bi-pencil-square"></i> <span class="btn-text">Editar</span>
+                                            </a>
+                                            <form action="{{ route('admin.accesos.destroy', $item->numero_id) }}"
+                                                method="POST" style="display: inline-block;"
+                                                onsubmit="return confirm('¿Estás seguro de eliminar este registro?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash"></i> <span class="btn-text">Eliminar</span>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+
+                        <div class="d-flex justify-content-center">
+                            {{ $acceso->appends(request()->all())->links('pagination::bootstrap-5') }}
+                        </div>
+
 
                     </div>
 

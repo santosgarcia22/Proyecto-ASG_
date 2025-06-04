@@ -2,7 +2,8 @@
 <style>
       /* COLOR DEL NAVBAR */
             .main-header.navbar {
-            background: rgb(57, 155, 255) !important;
+            background: rgb(0, 123, 255) !important;
+            
             border-bottom: none; /* Opcional: quita el borde inferior */
         }
 </style>

@@ -20,7 +20,8 @@ table {
                 <h4 class="mb-0">Actualizar Acceso</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.accesos.update', $acceso->numero_id) }}" method="POST">
+                <form action="{{ route('admin.accesos.update', $acceso->numero_id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -52,17 +53,19 @@ table {
                         <div class="col-md-4">
                             <label class="form-label">Ingreso</label>
                             <input type="datetime-local" name="ingreso" class="form-control"
-                                value="{{ $acceso->ingreso }}" required>
+                                value="{{ \Carbon\Carbon::parse($acceso->ingreso)->format('Y-m-d\TH:i') }}" required>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Salida</label>
+                            <label class="form-label">Salida (fecha y hora)</label>
+
                             <input type="datetime-local" name="salida" class="form-control"
-                                value="{{ $acceso->salida }}">
+                                value="{{ $acceso->salida ? \Carbon\Carbon::parse($acceso->salida)->format('Y-m-d\TH:i') : '' }}">
+
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Sincronización</label>
                             <input type="datetime-local" name="Sicronizacion" class="form-control"
-                                value="{{ $acceso->Sicronizacion }}">
+                                value="{{ $acceso->Sicronizacion ? \Carbon\Carbon::parse($acceso->Sicronizacion)->format('Y-m-d\TH:i') : '' }}">
                         </div>
                     </div>
 
@@ -72,17 +75,16 @@ table {
                         <small class="text-muted">Archivo actual: {{ $acceso->objetos }}</small>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Número de Vuelo</label>
-                        <select name="vuelo" class="form-control" required>
-                            @foreach($vuelo as $v)
-                            <option value="{{ $v->vuelo }}" {{ $v->vuelo == $acceso->vuelo ? 'selected' : '' }}>
-                                {{ $v->vuelo }}
-                            </option>
-                            @endforeach
-                        </select>
+                    <label class="form-label">Número de Vuelo</label>
+                    <select name="vuelo" class="form-control" required>
+                        @foreach ($vuelo as $v)
+                        <option value="{{ $v->id_vuelo }}" {{ $v->id_vuelo == $acceso->vuelo ? 'selected' : '' }}>
+                            {{ $v->numero_vuelo }}
+                        </option>
+                        @endforeach
+                    </select>
 
-                    </div>
+
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>

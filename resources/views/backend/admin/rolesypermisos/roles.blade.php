@@ -33,12 +33,12 @@
             </div>
             <br>
 
-            <button type="button" style="font-weight: bold; background-color:rgb(80, 163, 232); color: white !important;" value="Nuevo Rol" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
+            <button type="button" style="font-weight: bold; background-color:rgb(0, 123, 255); color: white !important;" value="Nuevo Rol" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
                 <i class="fas fa-edit"></i>
                 Nuevo Rol
             </button>
 
-            <button type="button" style="font-weight: bold; background-color:rgb(41, 127, 207); color: white !important;" 
+            <button type="button" style="font-weight: bold; background-color:rgb(0, 123, 255); color: white !important;" 
             value="Lista de Permisos" onclick="vistaPermisos()" class="button button-3d button-rounded button-pill button-small">
                 <i class="fas fa-list-alt"></i>
                 Lista de Permisos
