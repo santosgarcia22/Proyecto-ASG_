@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\acceso;
 use Carbon\Carbon;
 use App\Models\vuelo;
+use App\Models\Tipos;
 
 class AccesoFrontendController extends Controller
 {
@@ -23,16 +24,17 @@ class AccesoFrontendController extends Controller
     $query = acceso::select(
             "acceso.numero_id",
             "acceso.nombre",
-            "acceso.tipo",
             "acceso.posicion",
             "acceso.ingreso",
             "acceso.salida",
             "acceso.Sicronizacion",
             "acceso.id",
             "acceso.objetos",
-            "vuelo.numero_vuelo as numero_vuelo"
+            "vuelo.numero_vuelo as numero_vuelo",
+            "tipos.nombre_tipo as nombre_tipo"
         )
-        ->join("vuelo", "vuelo.id_vuelo", "=", "acceso.vuelo");
+        ->join("vuelo", "vuelo.id_vuelo", "=", "acceso.vuelo")
+        ->join("tipos", "tipos.id_tipo", "=", "acceso.tipo");
 
     // Si seleccionó un número de vuelo, filtra la consulta
     if (!empty($numeroVuelo)) {
@@ -57,8 +59,9 @@ class AccesoFrontendController extends Controller
     {
         //
         $vuelo = vuelo::all();
+        $Tipos = Tipos::all();
 
-        return view('/acceso/create')->with(['vuelo'=>$vuelo]);
+        return view('/acceso/create')->with(['vuelo'=>$vuelo, 'Tipos'=>$Tipos]);
     }
     /**
      * Store a newly created resource in storage.
@@ -74,8 +77,11 @@ class AccesoFrontendController extends Controller
                 'salida' => 'required',
                 'Sicronizacion' => 'required',
                 'id' => 'required',
-                'objetos' => '|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'objetos' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'vuelo' => 'required',
+            ],  [
+                'objetos.mimes' => 'Solo se permiten imágenes en formato JPEG y PNG.',
+                'objetos.max' => 'La imagen no debe superar los 2 MB.',
             ]);
             // Guardar imagen en carpeta 'public/objetos'
                 if ($request->hasFile('objetos')) {

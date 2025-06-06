@@ -7,6 +7,11 @@
             border-bottom: none; /* Opcional: quita el borde inferior */
         }
 </style>
+ <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('js/alerts.js') }}"></script>
+
 <nav class="main-header navbar navbar-expand border-bottom navbar-dark">
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -34,7 +39,7 @@
                 </a>
                 <div class="dropdown-divider"></div>
 
-                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                <a href="{{ route('admin.logout') }}" id="btn-logout"  onclick="event.preventDefault();
                     document.getElementById('frm-logout').submit();" class="dropdown-item"> <i class="fas fa-sign-out-alt"></i></i></i> Cerrar Sesión</a>
 
                 <form id="frm-logout" action="{{ route('admin.logout') }}" method="POST" style="display: none;">

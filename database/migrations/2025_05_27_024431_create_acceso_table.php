@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('acceso', function (Blueprint $table) {
             $table->id('numero_id');
             $table->string('nombre');
-            $table->string('tipo');
+            $table->bigInteger('tipo')->unsigned();
+            $table->foreign('tipo')->references('id_tipo')->on('tipos');
             $table->string('posicion');
             $table->datetime('ingreso');
             $table->datetime('salida');

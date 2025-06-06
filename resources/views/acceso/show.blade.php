@@ -75,7 +75,7 @@
 
                     <div class="card-body table-responsive">
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a href="{{ route('admin.accesos.create') }}" class="btn btn-sm btn-primary me-1">
+                            <a href="{{ route('admin.accesos.create') }}" onclick="guardarUltimaVista(event, this.href)"  class="btn btn-sm btn-primary me-1" >
                                 <i class="bi bi-pencil-square"></i> Registrar
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                                     <tr>
                                         <td>{{ $item->numero_id }}</td>
                                         <td>{{ $item->nombre }}</td>
-                                        <td>{{ $item->tipo }}</td>
+                                        <td>{{ $item->nombre_tipo }}</td>
                                         <td>{{ $item->posicion }}</td>
                                         <td>{{ $item->ingreso }}</td>
                                         <td>{{ $item->salida }}</td>
@@ -128,7 +128,7 @@
                                                 onsubmit="return confirm('¿Estás seguro de eliminar este registro?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                <button type="submit" class="btn btn-sm btn-danger btn-eliminar">
                                                     <i class="bi bi-trash"></i> <span class="btn-text">Eliminar</span>
                                                 </button>
                                             </form>
@@ -158,6 +158,21 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 
 <script>
+// Supón que tienes un botón con la clase 'btn-eliminar'
+$('.btn-eliminar').on('click', function(e) {
+    e.preventDefault();
+    var form = $(this).closest('form');
+    confirmarEliminacion(function() {
+        form.submit();
+    });
+});
+
+@if(session('success'))
+    <script>
+        mostrarExito("{{ session('success') }}");
+    </script>
+@endif
+
 // CSRF para Axios
 axios.defaults.headers.common['X-CSRF-TOKEN'] =
     document.querySelector('meta[name="csrf-token"]').getAttribute('content');

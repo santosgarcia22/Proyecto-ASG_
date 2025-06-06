@@ -33,8 +33,14 @@ table {
 
                         <div class="col-md-6">
                             <label for="tipo" class="form-label">Tipo</label>
-                            <input type="text" name="tipo" id="tipo" class="form-control" required>
+                            <select name="tipo" id="tipo" class="form-control" required>
+                                <option value="">Seleccione un tipo...</option>
+                                @foreach($Tipos as $tipo)
+                                <option value="{{ $tipo->id_tipo }}">{{ $tipo->nombre_tipo }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                     </div>
 
                     <div class="row mb-3">
@@ -68,7 +74,8 @@ table {
 
                     <div class="mb-3">
                         <label for="objetos" class="form-label">Objetos (subir imagen)</label>
-                        <input type="file" name="objetos" id="objetos" class="form-control" accept="image/*">
+                        <input type="file" name="objetos" id="objetos" class="form-control"
+                            accept="image/png image/jpeg ">
                     </div>
 
                     <div class="mb-3">
@@ -111,6 +118,20 @@ table {
 
 
 <!-- incluir tabla -->
+
+<script>
+document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (file) {
+        var validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!validTypes.includes(file.type)) {
+            alert('Solo se permiten imágenes JPG, PNG ');
+            e.target.value = '';
+        }
+    }
+});
+</script>
+
 <script type="text/javascript">
 $(document).ready(function() {
     var ruta = "{{ URL::to('/admin/roles/tabla') }}";

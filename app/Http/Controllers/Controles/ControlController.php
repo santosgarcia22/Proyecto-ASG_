@@ -66,6 +66,8 @@ class ControlController extends Controller
             'totalUsuarios', 'accesosHoy', 'totalVuelos', 'alertas',
             'dias', 'accesosPorDia', 'accesosRecientes'
         ));
+
+        
     }
 
     // redirecciona a vista sin permisos
