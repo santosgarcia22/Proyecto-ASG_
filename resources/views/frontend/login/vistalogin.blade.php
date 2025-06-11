@@ -23,7 +23,7 @@
    <style>
     body, html {
         min-height: 100vh;
-        background: linear-gradient(135deg, #1e293b 0%, #0a192f 100%);
+        background: linear-gradient(135deg,rgb(252, 51, 51) 0%,rgb(133, 142, 156) 100%);
         font-family: 'Roboto', sans-serif;
     }
     .login-overlay {
@@ -36,7 +36,7 @@
     .login-card {
         background: #fff;
         border-radius: 18px;
-        box-shadow: 0 8px 40px rgba(30,41,59,0.22), 0 2px 4px rgba(0,0,0,0.03);
+        box-shadow: 0 8px 40px rgba(30, 30, 238, 0.22), 0 2px 4px rgba(0,0,0,0.03);
         padding: 48px 36px 36px 36px;
         width: 100%;
         max-width: 380px;
@@ -56,7 +56,7 @@
     .login-logo img {
         width: 250px;
         border-radius: 18px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        /* box-shadow: 0 3px 12px rgba(243, 8, 8, 0.78);    es para poner una sobre a la img de airsecurity  */ 
         background: #fff;
         padding: 10px;
     }
@@ -89,8 +89,8 @@
         font-size: 1.02rem;
         padding: 20px 16px;
         margin-bottom: 16px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background:rgb(213, 222, 231);
+        border: 1px solidrgb(172, 177, 184);
     }
     .form-control-lg:focus {
         box-shadow: 0 0 0 2px #2563eb22;
@@ -100,7 +100,7 @@
     .input-group-text {
         background: transparent;
         border: none;
-        color: #2563eb;
+        color:rgb(239, 16, 53);
         font-size: 1.16rem;
         padding-right: 0;
     }
@@ -111,14 +111,14 @@
         font-weight: 700;
         font-size: 1.06rem;
         letter-spacing: 1.5px;
-        background: linear-gradient(90deg, #2563eb 60%, #38bdf8 100%);
+        background: linear-gradient(90deg,rgb(242, 20, 12) 60%,rgb(127, 134, 137) 100%);
         color: #fff;
         border: none;
         box-shadow: 0 3px 12px rgba(30,41,59,0.10);
         transition: background 0.2s, box-shadow 0.2s;
     }
     .btn-login:hover, .btn-login:focus {
-        background: linear-gradient(90deg, #1e40af 60%, #0ea5e9 100%);
+        background: linear-gradient(90deg,rgb(232, 96, 75) 60%,rgb(126, 138, 142) 100%);
         box-shadow: 0 8px 24px rgba(30,41,59,0.15);
         color: #fff;
     }

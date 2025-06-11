@@ -14,11 +14,8 @@
                 <div class="card">
                     <!-- /.card-header -->
                        <h1>Información del vuelo</h1>
-                    <div class="container">
-                      
-                    </div>
 
-                    <div class="container">
+                    <div class="container-fluid"  >
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <a href="{{ route('admin.vuelo.create') }}" class="btn btn-sm btn-primary me-1">
                                 <i class="bi bi-pencil-square"></i> Registrar

@@ -4,23 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\tipo;
+use Carbon\Carbon;
 
-class tipos extends Controller
+class tipoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-         $tipo = tipo::select(
-           "tipos.id_tipo",
-           "tipos.nombre_tipo"
-        )->get();
-        
-       return view('/tipo/show');
+  public function index(Request $request)
+{
+    $busqueda = $request->input('busqueda');
 
+    // Empieza el query pero sin ejecutarlo
+    $query = tipo::select("tipos.id_tipo", "tipos.nombre_tipo");
+
+    if (!empty($busqueda)) {
+        $query->where("tipos.nombre_tipo", "LIKE", "%$busqueda%");
     }
+
+    // Ejecuta el query ya filtrado
+    $tipos = $query->get();
+
+    return view('tipos.show')->with(['tipo' => $tipos]);
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +35,8 @@ class tipos extends Controller
     public function create()
     {
         //
-        return view('/tipo/create');
+        
+        return view('tipos.create');
     }
 
     /**

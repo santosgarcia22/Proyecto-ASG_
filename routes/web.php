@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\Registro\RegistroController;
 use App\Http\Controllers\Frontend\AccesoController;
 use App\Http\Controllers\AccesoFrontendController;
 use App\Http\Controllers\VueloFrontendController;
+use App\Http\Controllers\tipoController;
 
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 // --- LOGIN ---
@@ -22,6 +23,9 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.lo
 // --- CONTROL WEB ---
 Route::get('/panel', [ControlController::class,'indexRedireccionamiento'])->name('admin.panel');
 Route::get('/admin/home', [ControlController::class, 'home'])->name('admin.home');
+Route::get('/admin/grafico-logins', [ControlController::class, 'graficoLogins']);
+Route::get('/admin/acceso/grafico-por-hora', [ControlController::class, 'graficoAccesoPorHora']);
+
 
 
 // ---RUTAS DE ACCESOS ---
@@ -43,6 +47,20 @@ Route::get('/admin/vuelo/edit/{vuelo}', [VueloFrontendController::class, 'edit']
 Route::put('/admin/vuelo/update/{vuelo}', [VueloFrontendController::class, 'update'])->name('admin.vuelo.update');
 
 Route::delete('/admin/vuelo/{vuelo}', [VueloFrontendController::class, 'destroy'])->name('admin.vuelo.destroy');
+
+// RUTAS DE TIPO
+
+Route::get('/admin/tipo/index', [tipoController::class, 'index'])->name('admin.tipo.index');
+Route::get('/admin/tipos/create', [tipoController::class, 'create'])->name('admin.tipo.create');
+Route::post('/admin/tipo/store', [tipoController::class, 'store'])->name('admin.tipo.store');
+Route::get('/admin/tipo/show', [tipoController::class, 'index'])->name('admin.tipo.show');
+Route::get('/admin/tipo/edit/{tipo}', [tipoController::class, 'edit'])->name('admin.tipo.edit');
+Route::put('/admin/tipo/update/{tipo}', [tipoController::class, 'update'])->name('admin.tipo.update');
+Route::delete('/admin/tipo/{tipo}', [tipoController::class, 'destroy'])->name('admin.tipo.destroy');
+
+
+
+
 // --- ROLES ---
 
 Route::get('/admin/roles/index', [RolesController::class,'index'])->name('admin.roles.index');

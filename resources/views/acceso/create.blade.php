@@ -75,7 +75,7 @@ table {
                     <div class="mb-3">
                         <label for="objetos" class="form-label">Objetos (subir imagen)</label>
                         <input type="file" name="objetos" id="objetos" class="form-control"
-                            accept="image/png image/jpeg ">
+                            accept="image/png image/jpeg" required  >
                     </div>
 
                     <div class="mb-3">
@@ -94,7 +94,7 @@ table {
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Registrar</button>
-                        <a href="" class="btn btn-secondary">Cancelar</a>
+                        <a href="{{ route('admin.accesos.show') }}" class="btn btn-secondary">Cancelar</a>
                     </div>
                 </form>
             </div>

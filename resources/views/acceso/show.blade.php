@@ -41,111 +41,186 @@
         }
     }
 
+    @media (max-width: 768px) {
+        .d-flex.flex-wrap.gap-2.w-100 {
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+    }
+
 
 }
 </style>
 <section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card shadow-sm">
-                    <!-- Información del vuelo -->
-                    @if($numeroVuelo)
-                    <div class="alert alert-info mb-0">Mostrando accesos para el vuelo
-                        <strong>{{ $numeroVuelo }}</strong>
+    <div class="container-fluid mt-3">
+
+        @if($numeroVuelo)
+        <div class="alert alert-info mb-2">
+            Mostrando accesos para el vuelo <b>{{ $numeroVuelo }}</b>
+        </div>
+        @endif
+
+        <!-- Encabezado principal -->
+        <!-- <div class="d-flex align-items-center mb-3">
+            <h2 class="flex-grow-1 mb-0">Accesos</h2>
+            <a href="{{ route('admin.accesos.create') }}" class="btn btn-primary">
+                <i class="bi bi-pencil-square"></i> Nuevo Acceso
+            </a>
+        </div> -->
+
+        <!-- Filtro de búsqueda y por vuelo -->
+        <!-- <div class="card-header bg-primary text-white d-flex align-items-center">
+            <span class="fw-bold">Lista de Accesos</span>
+            <form method="GET" action="{{ route('admin.accesos.index') }}"
+                class="ms-auto d-flex align-items-center gap-2">
+                <input type="text" name="busqueda" class="form-control form-control-sm" placeholder="Buscar..."
+                    value="{{ request('busqueda') }}">
+                <select name="numero_vuelo" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+                    <option value="">-- Todos los vuelos --</option>
+                    @foreach($vuelos as $vuelo)
+                    <option value="{{ $vuelo->numero_vuelo }}"
+                        {{ request('numero_vuelo') == $vuelo->numero_vuelo ? 'selected' : '' }}>
+                        {{ $vuelo->numero_vuelo }}
+                    </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-light btn-sm">Buscar</button>
+            </form>
+        </div> -->
+
+        <!-- Caja azul de filtro/listado -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <span class="fw-bold">Lista de Accesos</span>
+                <!-- <form method="GET" action="{{ route('admin.accesos.index') }}"
+                    class="ms-auto d-flex align-items-center">
+                    <input type="text" name="busqueda" class="form-control form-control-sm me-2" placeholder="Buscar..."
+                        value="{{ request('busqueda') }}">
+                    <button type="submit" class="btn btn-light btn-sm">Buscar</button>
+                </form> -->
+            </div>
+
+            <div class="card-body">
+                <div class="mb-2 d-flex justify-content-between align-items-center">
+                    <!-- Selector de cantidad de registros por página -->
+                    <form method="GET" action="{{ route('admin.accesos.index') }}" class="d-flex align-items-center">
+                        <label class="me-2 mb-0">Mostrar</label>
+                        <select name="per_page" onchange="this.form.submit()" class="form-select form-select-sm w-auto">
+                            @foreach([5, 10, 25, 50, 100] as $size)
+                            <option value="{{ $size }}" {{ request('per_page', 5) == $size ? 'selected' : '' }}>
+                                {{ $size }}</option>
+                            @endforeach
+                        </select>
+                        <label class="ms-2 mb-0">registros</label>
+                        @if(request('busqueda'))
+                        <input type="hidden" name="busqueda" value="{{ request('busqueda') }}">
+                        @endif
+                        @if(request('numero_vuelo'))
+                        <input type="hidden" name="numero_vuelo" value="{{ request('numero_vuelo') }}">
+                        @endif
+
+                    </form>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                    <form method="GET" action="{{ route('admin.accesos.index') }}" class="d-flex flex-wrap gap-2 w-100">
+                        <!-- Input de búsqueda -->
+                        <input type="text" name="busqueda" class="form-control form-control-sm" placeholder="Buscar..."
+                            value="{{ request('busqueda') }}" style="max-width: 210px;">
+
+                        <!-- Select de vuelo -->
+                        <select name="numero_vuelo" class="form-select form-select-sm" style="max-width: 170px;"
+                            onchange="this.form.submit()">
+                            <option value="">-- Todos los vuelos --</option>
+                            @foreach($vuelos as $vuelo)
+                            <option value="{{ $vuelo->numero_vuelo }}"
+                                {{ request('numero_vuelo') == $vuelo->numero_vuelo ? 'selected' : '' }}>
+                                {{ $vuelo->numero_vuelo }}
+                            </option>
+                            @endforeach
+                        </select>
+
+                        <!-- Botón Buscar -->
+                        <button type="submit" class="btn btn-primary btn-sm px-4">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </form>
+
+                    <!-- Nuevo Acceso (opcional, muévelo a la derecha) -->
+                    <a href="{{ route('admin.accesos.create') }}" class="btn btn-outline-primary btn-sm ms-auto">
+                        <i class="bi bi-pencil-square"></i> Nuevo Acceso
+                    </a>
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Posición</th>
+                                <th>Ingreso</th>
+                                <th>Salida</th>
+                                <th>Usuario</th>
+                                <th>Vuelo</th>
+                                <th>Objetos</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($acceso as $item)
+                            <tr>
+                                <td>{{ $item->numero_id }}</td>
+                                <td>{{ $item->nombre }}</td>
+                                <td>{{ $item->nombre_tipo }}</td>
+                                <td>{{ $item->posicion }}</td>
+                                <td>{{ $item->ingreso }}</td>
+                                <td>{{ $item->salida }}</td>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->numero_vuelo }}</td>
+                                <td>
+                                    @if($item->objetos)
+                                    <img src="{{ asset('storage/objetos/' . basename($item->objetos)) }}" alt="Imagen"
+                                        style="max-width: 50px; max-height: 50px; object-fit: cover;">
+                                    @else
+                                    <span class="text-muted">No hay imagen</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.accesos.edit', $item->numero_id) }}"
+                                        class="btn btn-sm btn-info me-1">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <form action="{{ route('admin.accesos.destroy', $item->numero_id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="9" class="text-center">No se encontraron registros</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pie de página: paginación y resumen -->
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <div>
+                        Mostrando registros del {{ $acceso->firstItem() }} al {{ $acceso->lastItem() }} de un total de
+                        {{ $acceso->total() }} registros
                     </div>
-                    @endif
-
-                    <div class="card-header bg-primary text-white">
-                        <h1 class="h4">Información del vuelo</h1>
-                        <form method="GET" action="{{ route('admin.accesos.index') }}" class="mb-0 d-inline">
-                            <label for="numero_vuelo" class="form-label mb-0">Número de vuelo:</label>
-                            <select name="numero_vuelo" id="numero_vuelo" class="form-select d-inline-block w-auto ms-2"
-                                onchange="this.form.submit()">
-                                <option value="">-- Todos --</option>
-                                @foreach($vuelos as $v)
-                                <option value="{{ $v->numero_vuelo }}"
-                                    {{ $numeroVuelo == $v->numero_vuelo ? 'selected' : '' }}>
-                                    {{ $v->numero_vuelo }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </form>
+                    <div>
+                        {{ $acceso->appends(request()->all())->links('pagination::bootstrap-5') }}
                     </div>
-
-                    <div class="card-body table-responsive">
-                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a href="{{ route('admin.accesos.create') }}" onclick="guardarUltimaVista(event, this.href)"  class="btn btn-sm btn-primary me-1" >
-                                <i class="bi bi-pencil-square"></i> Registrar
-                            </a>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="table-responsive">
-                            <table
-                                class="table table-bordered table-striped table-hover align-middle table-responsive-sm table-responsive-md">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Posición</th>
-                                        <th>Ingreso</th>
-                                        <th>Salida</th>
-                                        <th class="col-sincronizacion">Sincronización</th>
-                                        <th class="col-usuario">Usuario</th>
-                                        <th class="col-objetos">Objetos</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($acceso as $item)
-                                    <tr>
-                                        <td>{{ $item->numero_id }}</td>
-                                        <td>{{ $item->nombre }}</td>
-                                        <td>{{ $item->nombre_tipo }}</td>
-                                        <td>{{ $item->posicion }}</td>
-                                        <td>{{ $item->ingreso }}</td>
-                                        <td>{{ $item->salida }}</td>
-                                        <td class="col-sincronizacion">{{ $item->Sicronizacion }}</td>
-                                        <td class="col-usuario">{{ $item->id }}</td>
-                                        <td class="col-objetos">
-                                            @if($item->objetos)
-                                            <img src="{{ asset('storage/objetos/' . basename($item->objetos)) }}"
-                                                alt="Imagen"
-                                                style="max-width: 80px; max-height: 80px; object-fit: cover;">
-                                            @else
-                                            <span class="text-muted">No hay imagen</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.accesos.edit', $item->numero_id) }}"
-                                                class="btn btn-sm btn-primary me-1">
-                                                <i class="bi bi-pencil-square"></i> <span class="btn-text">Editar</span>
-                                            </a>
-                                            <form action="{{ route('admin.accesos.destroy', $item->numero_id) }}"
-                                                method="POST" style="display: inline-block;"
-                                                onsubmit="return confirm('¿Estás seguro de eliminar este registro?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger btn-eliminar">
-                                                    <i class="bi bi-trash"></i> <span class="btn-text">Eliminar</span>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            {{ $acceso->appends(request()->all())->links('pagination::bootstrap-5') }}
-                        </div>
-
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -167,12 +242,13 @@ $('.btn-eliminar').on('click', function(e) {
     });
 });
 
-@if(session('success'))
-    <script>
-        mostrarExito("{{ session('success') }}");
-    </script>
-@endif
+@if(session('success')) <
+    script >
+    mostrarExito("{{ session('success') }}");
+</script>
 
+@endif
+<script>
 // CSRF para Axios
 axios.defaults.headers.common['X-CSRF-TOKEN'] =
     document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -212,4 +288,6 @@ $(document).on('click', '.btn-eliminar', function() {
     });
 });
 </script>
+
+
 @endsection

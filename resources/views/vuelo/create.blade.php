@@ -42,7 +42,7 @@
 
                 <div class="text-end">
                     <button type="submit" class="btn btn-success">Registrar</button>
-                    <a href="" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{ route('admin.vuelo.show') }}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

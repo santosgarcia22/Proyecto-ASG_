@@ -13,5 +13,17 @@ class acceso extends Model
     protected $primaryKey = 'numero_id'; // llave primaria
     protected $fillable = ['nombre','tipo', 'posicion', 'ingreso', 'salida', 'Sicronizacion', 'id', 'objetos', 'vuelo']; //datos para asigancion de forma masiva
     
+    // app/Models/Acceso.php
+
+   public function tipo()
+    {
+        return $this->belongsTo(\App\Models\tipo::class, 'tipo', 'id_tipo');
+    }
+    
+    public function vuelo()
+    {
+        return $this->belongsTo(\App\Models\vuelo::class, 'vuelo', 'id_vuelo');
+    }
+
 
 }

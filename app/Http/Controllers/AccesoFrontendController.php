@@ -10,9 +10,7 @@ use App\Models\Tipos;
 
 class AccesoFrontendController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index(Request $request)
 {
     // Traer todos los vuelos para el select
@@ -20,6 +18,7 @@ class AccesoFrontendController extends Controller
 
     // Verifica si hay filtro de vuelo seleccionado
     $numeroVuelo = $request->input('numero_vuelo');
+    $busqueda = $request->input('busqueda');
 
     $query = acceso::select(
             "acceso.numero_id",
@@ -41,7 +40,14 @@ class AccesoFrontendController extends Controller
         $query->where("vuelo.numero_vuelo", $numeroVuelo);
     }
 
+    if (!empty($busqueda)) {
+        $query->where(function($q) use ($busqueda) {
+            $q->where("acceso.nombre", "LIKE", "%$busqueda")
+            ->orWhere("acceso.id", "LIKE", "%$busqueda" );
+        });
+    }
     // Paginado
+    $perPage = $request->input('per_page', 5); // 5 por defecto
     $acceso = $query->paginate(5);
 
     return view('acceso.show')->with([
@@ -173,16 +179,24 @@ public function update(Request $request, acceso $acceso)
     /**
      * Remove the specified resource from storage.
      */
-  public function destroy($id)
-    {
-        $registro = acceso::where('numero_id', $id)->first();
+        public function destroy($id)
+        {
+            $registro = acceso::where('numero_id', $id)->first();
 
-        if ($registro) {
-            $registro->delete();
-            return redirect()->route('admin.accesos.show')->with('mensaje', 'Registro eliminado exitosamente');
+            if ($registro) {
+                $registro->delete();
+                // Si es AJAX responde JSON:
+                if (request()->ajax()) {
+                    return response()->json(['success' => true]);
+                }
+                return redirect()->route('admin.accesos.show')->with('mensaje', 'Registro eliminado exitosamente');
+            }
+
+            if (request()->ajax()) {
+                return response()->json(['success' => false, 'message' => 'No se encontró el registro']);
+            }
+            return redirect()->route('admin.accesos.show')->with('mensaje', 'No se encontró el registro');
         }
 
-        return redirect()->route('admin.accesos.show')->with('mensaje', 'No se encontró el registro');
-    }
 
 }
