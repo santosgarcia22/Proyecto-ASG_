@@ -54,6 +54,13 @@
 <section class="content">
     <div class="container-fluid mt-3">
 
+        @if ($errors->has('objetos'))
+        <div class="alert alert-danger">
+            {{ $errors->first('objetos') }}
+        </div>
+        @endif
+
+
         @if($numeroVuelo)
         <div class="alert alert-info mb-2">
             Mostrando accesos para el vuelo <b>{{ $numeroVuelo }}</b>
@@ -193,14 +200,14 @@
                                         class="btn btn-sm btn-info me-1">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>
-                                    <form action="{{ route('admin.accesos.destroy', $item->numero_id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i> Eliminar
-                                        </button>
-                                    </form>
+
+
+                                    <button class="btn btn-danger btn-sm btn-eliminar"
+                                        data-url="{{ route('admin.accesos.destroy', $item->numero_id) }}"
+                                        data-token="{{ csrf_token() }}">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+
                                 </td>
                             </tr>
                             @empty
@@ -227,10 +234,33 @@
     </div>
 </section>
 
+{{-- Scripts --}}
+@yield('scripts')
+
+
+<script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('js/delete.js') }}"></script>
+
 @section('archivos-js')
 <script src="{{ asset('js/axios.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
+
+<script>
+document.getElementById('objetos').addEventListener('change', function() {
+    const allowed = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp', 'image/bmp',
+        'image/tiff', 'image/heic'
+    ];
+    if (this.files.length) {
+        if (!allowed.includes(this.files[0].type)) {
+            alert('Formato de imagen no permitido. Usa JPEG, PNG, GIF, WebP, BMP, TIFF o HEIC.');
+            this.value = '';
+        }
+    }
+});
+</script>
+
+
 
 <script>
 // Supón que tienes un botón con la clase 'btn-eliminar'

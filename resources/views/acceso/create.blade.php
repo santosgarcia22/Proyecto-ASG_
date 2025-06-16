@@ -75,7 +75,9 @@ table {
                     <div class="mb-3">
                         <label for="objetos" class="form-label">Objetos (subir imagen)</label>
                         <input type="file" name="objetos" id="objetos" class="form-control"
-                            accept="image/png image/jpeg" required  >
+                            accept="image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/tiff, image/heic"
+                            required>
+
                     </div>
 
                     <div class="mb-3">

@@ -11,15 +11,33 @@ class VueloFrontendController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+
+        // verificar si hay filtro seleccionado 
+
+        $busqueda = $request->input('busqueda');
 
          $vuelo = vuelo::select(
            "vuelo.id_vuelo",
            "vuelo.fecha",
            "vuelo.numero_vuelo"
-        )->get();
+         );
+
+
+       if (!empty($busqueda)) {
+        $vuelo->where(function($q) use ($busqueda) {
+            $q->where("vuelo.numero_vuelo", "LIKE", "%$busqueda")
+            ->orWhere("vuelo.id_vuelo", "LIKE", "%$busqueda" );
+        });
+    }
+        
+        //paginado 
+        $perPage = $request->input('per_page',5);
+        $vuelo = $vuelo->paginate(5);
+
+
         
        return view('/vuelo/show')->with(['vuelo' => $vuelo]);
     }
@@ -98,13 +116,8 @@ class VueloFrontendController extends Controller
     public function destroy(string $id)
     {
         //
-        $registro = vuelo::where('id_vuelo', $id)->first();
-
-        if ($registro) {
-            $registro->delete();
-            return redirect()->route('admin.vuelo.show')->with('mensaje', 'Registro eliminado exitosamente');
-        }
-
-        return redirect()->route('admin.vuelo.show')->with('mensaje', 'No se encontró el registro');
+       
+        vuelo::destroy($id);
+        return response()->json(['res'=> true]);
     }
 }

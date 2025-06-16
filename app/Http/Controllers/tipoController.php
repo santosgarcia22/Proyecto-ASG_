@@ -99,13 +99,8 @@ class tipoController extends Controller
     {
         //
 
-         $registro = vuelo::where('id_tipo', $id)->first();
-
-        if ($registro) {
-            $registro->delete();
-            return redirect()->route('admin.tipo.show')->with('mensaje', 'Registro eliminado exitosamente');
-        }
-
-        return redirect()->route('admin.vuelo.show')->with('mensaje', 'No se encontró el registro');
+         tipo::destroy($id);
+            return response()->json(['res' => true]);
+        
     }
 }

@@ -83,12 +83,12 @@ class AccesoFrontendController extends Controller
                 'salida' => 'required',
                 'Sicronizacion' => 'required',
                 'id' => 'required',
-                'objetos' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'objetos' => 'required|image|mimes:jpeg,png,jpg,gif,webp,bmp,tiff,heic|max:2048',
                 'vuelo' => 'required',
-            ],  [
-                'objetos.mimes' => 'Solo se permiten imágenes en formato JPEG y PNG.',
-                'objetos.max' => 'La imagen no debe superar los 2 MB.',
-            ]);
+            ],   [
+                    'objetos.mimes' => 'Solo se permiten imágenes en formato JPEG, PNG, GIF, WebP, BMP, TIFF y HEIC.',
+                    'objetos.max' => 'La imagen no debe superar los 2 MB.',
+                ]);
             // Guardar imagen en carpeta 'public/objetos'
                 if ($request->hasFile('objetos')) {
                     $file = $request->file('objetos');
@@ -181,21 +181,25 @@ public function update(Request $request, acceso $acceso)
      */
         public function destroy($id)
         {
-            $registro = acceso::where('numero_id', $id)->first();
 
-            if ($registro) {
-                $registro->delete();
-                // Si es AJAX responde JSON:
-                if (request()->ajax()) {
-                    return response()->json(['success' => true]);
-                }
-                return redirect()->route('admin.accesos.show')->with('mensaje', 'Registro eliminado exitosamente');
-            }
+             acceso::destroy($id);
+            return response()->json(['res' => true]);
 
-            if (request()->ajax()) {
-                return response()->json(['success' => false, 'message' => 'No se encontró el registro']);
-            }
-            return redirect()->route('admin.accesos.show')->with('mensaje', 'No se encontró el registro');
+            // $registro = acceso::where('numero_id', $id)->first();
+
+            // if ($registro) {
+            //     $registro->delete();
+            //     // Si es AJAX responde JSON:
+            //     if (request()->ajax()) {
+            //         return response()->json(['success' => true]);
+            //     }
+            //     return redirect()->route('admin.accesos.show')->with('mensaje', 'Registro eliminado exitosamente');
+            // }
+
+            // if (request()->ajax()) {
+            //     return response()->json(['success' => false, 'message' => 'No se encontró el registro']);
+            // }
+            // return redirect()->route('admin.accesos.show')->with('mensaje', 'No se encontró el registro');
         }
 
 

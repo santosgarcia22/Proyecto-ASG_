@@ -94,6 +94,75 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
 
+                @can('sidebar.roles.y.permisos')
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-">
+                        <i class="fas fa-tag"></i> <!-- Ícono de etiqueta (tag) -->
+
+                        <p>
+                            tipo
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.tipo.index') }}" target="frameprincipal" class="nav-link"
+                                onclick="guardarUltimaVista(event, this.href)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tipo</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                @endcan
+
+                @can('sidebar.roles.y.permisos')
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-">
+                        <i class="fas fa-plane-departure"></i> <!-- icono sólido de avión -->
+                        <p>
+                            Vuelos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.vuelo.index') }}" target="frameprincipal" class="nav-link"
+                                onclick="guardarUltimaVista(event, this.href)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vuelo</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endcan
+
+                <!-- CONTROL DE ACCESO -->
+                @can('sidebar.roles.y.permisos')
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-">
+                        <i class="fas fa-door-open"></i> <!-- icono sólido, puerta abierta para acceso -->
+                        <p>
+                            Control de Acceso
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.accesos.index') }}" target="frameprincipal" class="nav-link"
+                                onclick="guardarUltimaVista(event, this.href)">
+                                <i class="far fa-circle nav-icon"></i> Accesos
+                            </a>
+
+                        </li>
+                    </ul>
+                </li>
+                @endcan
+
                 <!-- ROLES Y PERMISO -->
                 @can('sidebar.roles.y.permisos')
                 <li class="nav-item">
@@ -122,71 +191,10 @@
                     </ul>
                 </li>
                 @endcan
-       @can('sidebar.roles.y.permisos')
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-">
-                        <i class="fas fa-plane-departure"></i> <!-- icono sólido de avión -->
-                        <p>
-                            Vuelos
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.vuelo.index') }}" target="frameprincipal" class="nav-link"
-                                onclick="guardarUltimaVista(event, this.href)">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Vuelo</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                 @endcan
-                <!-- CONTROL DE ACCESO -->
-                @can('sidebar.roles.y.permisos')
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-">
-                        <i class="fas fa-door-open"></i> <!-- icono sólido, puerta abierta para acceso -->
-                        <p>
-                            Control de Acceso
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.accesos.index') }}" target="frameprincipal" class="nav-link"
-                                onclick="guardarUltimaVista(event, this.href)">
-                                <i class="far fa-circle nav-icon"></i> Accesos
-                            </a>
 
-                        </li>
-                    </ul>
-                </li>
-                @endcan
 
                 <!-- VUELOS -->
-                @can('sidebar.roles.y.permisos')
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-">
-                        <i class="fas fa-tag"></i> <!-- Ícono de etiqueta (tag) -->
-
-                        <p>
-                            tipo
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.tipo.index') }}" target="frameprincipal" class="nav-link"
-                                onclick="guardarUltimaVista(event, this.href)">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tipo</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @endcan
 
             </ul>
         </nav>
