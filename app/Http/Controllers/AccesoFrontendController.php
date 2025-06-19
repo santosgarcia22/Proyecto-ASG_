@@ -32,8 +32,8 @@ class AccesoFrontendController extends Controller
             "vuelo.numero_vuelo as numero_vuelo",
             "tipos.nombre_tipo as nombre_tipo"
         )
-        ->join("vuelo", "vuelo.id_vuelo", "=", "acceso.vuelo")
-        ->join("tipos", "tipos.id_tipo", "=", "acceso.tipo");
+        ->leftJoin("vuelo", "vuelo.id_vuelo", "=", "acceso.vuelo")
+        ->leftJoin("tipos", "tipos.id_tipo", "=", "acceso.tipo");
 
     // Si seleccionó un número de vuelo, filtra la consulta
     if (!empty($numeroVuelo)) {
@@ -47,8 +47,8 @@ class AccesoFrontendController extends Controller
         });
     }
     // Paginado
-    $perPage = $request->input('per_page', 5); // 5 por defecto
-    $acceso = $query->paginate(5);
+    $perPage = $request->input('per_page', 3); // 5 por defecto
+    $acceso = $query->paginate(3);
 
     return view('acceso.show')->with([
         'acceso' => $acceso,

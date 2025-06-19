@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\acceso;
@@ -34,13 +35,16 @@ class AccesoApiController extends Controller
         $data['objetos'] = 'default.jpg';
 
         // Si viene la imagen base64, la procesamos
-        if ($request->has('imagen_base64')) {
+            if ($request->has('imagen_base64')) {
             $imagen = $request->input('imagen_base64');
             $nombreArchivo = 'img_' . time() . '.jpg';
-            $ruta = public_path('objetos/' . $nombreArchivo);
-            file_put_contents($ruta, base64_decode($imagen));
-            $data['objetos'] = 'objetos/' . $nombreArchivo; // Ruta relativa
-            unset($data['imagen_base64']); // Eliminamos el base64 del array
+
+            // Guarda la imagen en storage/app/public/objetos
+            Storage::disk('public')->put('objetos/' . $nombreArchivo, base64_decode($imagen));
+
+            // Guarda la ruta relativa para acceso público
+            $data['objetos'] = 'storage/objetos/' . $nombreArchivo; // ruta para mostrar desde la web
+            unset($data['imagen_base64']);
         }
 
         // Asignar campos fijos o dummy si faltan
@@ -62,6 +66,5 @@ class AccesoApiController extends Controller
             'id' => $nuevo->numero_id
         ], 201);
     }
-
 
 }

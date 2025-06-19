@@ -30,14 +30,29 @@
                         <label for="nombre" class="form-label">Nombre del vuelo</label>
                         <input type="text" name="numero_vuelo" id="numero_vuelo" class="form-control" required>
                     </div>
+                       <div class="col-md-6">
+                        <label for="nombre" class="form-label">Matricula</label>
+                        <input type="text" name="numero_vuelo" id="numero_vuelo" class="form-control" required>
+                    </div>
                 </div>
 
                 <div class="row mb-3">
+                       <div class="col-md-6">
+                        <label for="nombre" class="form-label">Destino</label>
+                        <input type="text" name="numero_vuelo" id="numero_vuelo" class="form-control" required>
+                    </div>
                     <div class="col-md-4">
                         <label for="ingreso" class="form-label">Ingreso (fecha y hora)</label>
                         <input type="datetime-local" name="fecha" id="fecha" class="form-control" required>
                     </div>
 
+                </div>
+                 <div class="row mb-3">
+                       <div class="col-md-6">
+                        <label for="nombre" class="form-label">Origin</label>
+                        <input type="text" name="numero_vuelo" id="numero_vuelo" class="form-control" required>
+                    </div>
+                  
                 </div>
 
                 <div class="text-end">

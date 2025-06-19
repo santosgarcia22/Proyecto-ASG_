@@ -71,7 +71,8 @@ table {
 
                     <div class="mb-3">
                         <label class="form-label">Objetos (imagen)</label>
-                        <input type="file" name="objetos" class="form-control">
+                        <input type="file" name="objetos" class="form-control"  accept="image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/tiff, image/heic"
+                            required>
                         <small class="text-muted">Archivo actual: {{ $acceso->objetos }}</small>
                     </div>
 
@@ -88,7 +89,7 @@ table {
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
-                        <a href="" class="btn btn-primary">Cancelar</a>
+                        <a href="{{ route('admin.accesos.show') }}" class="btn btn-secondary">Cancelar</a>
                     </div>
                 </form>
             </div>

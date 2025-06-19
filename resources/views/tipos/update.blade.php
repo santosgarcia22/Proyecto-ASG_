@@ -20,15 +20,15 @@ table {
                 <h4 class="mb-0">Actualizar Tipo</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.accesos.update', $acceso->numero_id) }}" method="POST"
+                <form action="{{ route('admin.tipo.update', $tipo->id_tipo) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" value="{{ $acceso->nombre }}"
+                            <label for="nombre_tipo" class="form-label">Nombre</label>
+                            <input type="text" name="nombre_tipo" class="form-control" value="{{ $tipo->nombre_tipo }}"
                                 required>
                         </div>
                     </div>

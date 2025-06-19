@@ -132,7 +132,7 @@
                                     <td>{{ $item->id_tipo }}</td>
                                     <td>{{ $item->nombre_tipo }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-info me-1">
+                                        <a href="{{ route('admin.tipo.edit', $item->id_tipo )}}" class="btn btn-sm btn-info me-1">
                                             <i class="bi bi-pencil-square"></i> Editar
                                         </a>
                                     

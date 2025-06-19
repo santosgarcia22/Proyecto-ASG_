@@ -72,7 +72,7 @@ class tipoController extends Controller
     public function edit(tipo $tipo)
     {
         //
-         return view('/tipo/update', ['tipo' => $tipo]);
+         return view('/tipos/update', ['tipo' => $tipo]);
     }
 
     /**
