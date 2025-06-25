@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\tipo;
+use App\Models\acceso;
 use Carbon\Carbon;
 
 class tipoController extends Controller
@@ -71,8 +72,10 @@ class tipoController extends Controller
      */
     public function edit(tipo $tipo)
     {
-        //
-         return view('/tipos/update', ['tipo' => $tipo]);
+        //Verificar si el tipo esta usando en la tabla acceso
+        $relacionado = \App\Models\acceso::where('tipo', $tipo->id_tipo)->exists();
+
+         return view('/tipos/update', ['tipo' => $tipo, 'relacionado'=> $relacionado]);
     }
 
     /**
@@ -81,6 +84,16 @@ class tipoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+
+         $tipo = tipo::findOrFail($id);
+
+         $relacionado = \App\Models\acceso::where('tipo', $tipo->id_tipo)->exists();
+
+        if ($relacionado){
+            //no actualizar el nombre si ya esta relacioando 
+            
+            return redirect()->route('admin.tipo.show')->with('error','No puedes editar el nombre, ya etsa relacionado a un acceos');
+        }
 
           $data = $request->validate([
             'nombre_tipo' => 'required'

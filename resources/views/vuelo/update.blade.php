@@ -24,15 +24,24 @@ table {
                     @csrf
                     @method('PUT')
 
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="nombre" class="form-label">Nombre del vuelo</label>
-                            <input type="text" name="numero_vuelo" class="form-control" value="{{ $vuelo->numero_vuelo }}"
-                                required>
+                            <input type="text" name="numero_vuelo" class="form-control"
+                                value="{{ $vuelo->numero_vuelo }}" @if($relacionado) readonly @endif required>
+
+                            @if($relacionado)
+                            <small class="text-danger">No se puede editar el numero de vuelo porque ya esta relacionado
+                                a un acceso.</small>
+                            @endif
                         </div>
+
+
+
+
                     </div>
                     <div class="row mb-3">
-                      
                         <div class="col-md-4">
                             <label class="form-label">Fecha del vuelo</label>
                             <input type="datetime-local" name="fecha" class="form-control"
@@ -41,8 +50,9 @@ table {
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
-                         <a href="{{ route('admin.vuelo.show') }}" class="btn btn-secondary">Cancelar</a>
+                        <a href="{{ route('admin.vuelo.show') }}" class="btn btn-secondary">Cancelar</a>
                     </div>
+
                 </form>
             </div>
         </div>

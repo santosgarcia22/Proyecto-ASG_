@@ -12,8 +12,8 @@ table {
     table-layout: fixed;
 }
 </style>
-
-<div id="divcontenedor" style="display: none">
+<!-- style="display: none" para ocultarlo dinamincamente -->
+<div id="divcontenedor"  >
     <div class="container mt-4">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
@@ -29,12 +29,16 @@ table {
                         <div class="col-md-6">
                             <label for="nombre_tipo" class="form-label">Nombre</label>
                             <input type="text" name="nombre_tipo" class="form-control" value="{{ $tipo->nombre_tipo }}"
-                                required>
+                                @if($relacionado) readonly @endif required>
+                            @if($relacionado)
+                            <small class="text-danger">No puedes editar el nombre porque ya está relacionado a un
+                                acceso.</small>
+                            @endif
                         </div>
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
-                        <a href="" class="btn btn-primary">Cancelar</a>
+                        <a href="{{ route('admin.tipo.show') }}" class="btn btn-primary">Cancelar</a>
                     </div>
                 </form>
             </div>

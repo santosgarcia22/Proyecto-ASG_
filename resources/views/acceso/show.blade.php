@@ -110,6 +110,9 @@
                     <form method="GET" action="{{ route('admin.accesos.index') }}" class="d-flex flex-wrap gap-2 w-100">
                         <input type="text" name="busqueda" class="form-control form-control-sm" placeholder="Buscar..."
                             value="{{ request('busqueda') }}" style="max-width: 210px;">
+                        <button type="submit" class="btn btn-primary btn-sm px-4">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
 
                         <select name="numero_vuelo" class="form-select form-select-sm" style="max-width: 170px;"
                             onchange="this.form.submit()">
@@ -122,9 +125,7 @@
                             @endforeach
                         </select>
 
-                        <button type="submit" class="btn btn-primary btn-sm px-4">
-                            <i class="bi bi-search"></i> Buscar
-                        </button>
+
                     </form>
                     <a href="{{ route('admin.accesos.create') }}" class="btn btn-outline-primary btn-sm ms-auto">
                         <i class="bi bi-pencil-square"></i> Nuevo Acceso

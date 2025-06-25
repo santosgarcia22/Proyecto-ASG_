@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AccesoApiController;
+use App\Http\Controllers\Api\UsuarioAppController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/accesos', [AccesoApiController::class, 'index']);
 Route::get('/accesos/{id}', [AccesoApiController::class, 'show']);
 Route::post('/accesos', [AccesoApiController::class, 'store']);
+
+//RUTAS API PARA EL LOGIN
+Route::post('login-app',
+ [UsuarioAppController::class, 'login']);

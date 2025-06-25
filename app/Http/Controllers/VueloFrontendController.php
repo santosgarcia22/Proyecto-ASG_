@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\vuelo;
+use App\Models\acceso;
 use Carbon\Carbon;
 
 class VueloFrontendController extends Controller
@@ -87,7 +88,9 @@ class VueloFrontendController extends Controller
      */
    public function edit(vuelo $vuelo)
     {
-        return view('/vuelo/update', ['vuelo' => $vuelo]);
+        $relacionado = acceso::where('vuelo', $vuelo->id_vuelo)->exists();
+
+        return view('/vuelo/update', ['vuelo' => $vuelo, 'relacionado' => $relacionado]);
     }
 
 
