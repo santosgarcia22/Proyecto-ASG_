@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UsuarioApp;
@@ -12,14 +11,12 @@ class UsuarioAppController extends Controller
      // Login
     public function login(Request $request)
     {
-
         \Log::info('Request recibido', $request->all());
 
         $request->validate([
             'usuario' => 'required',
             'password' => 'required'
         ]);
-
         $user = UsuarioApp::where('usuario', $request->usuario)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
@@ -29,7 +26,7 @@ class UsuarioAppController extends Controller
         } else {
             // Login FAIL
             return response()->json(['success' => false, 
-            'message' => 'Credenciales incorrectas'], 401);
+            'message' => 'Credenciales incorrectas'], 200);
         }
     }
 
