@@ -92,15 +92,15 @@ class tipoController extends Controller
         if ($relacionado){
             //no actualizar el nombre si ya esta relacioando 
             
-            return redirect()->route('admin.tipo.show')->with('error','No puedes editar el nombre, ya etsa relacionado a un acceos');
+            return redirect()->route('admin.tipo.show')->with('error','No puedes editar el nombre, ya esta relacionado a un acceos');
         }
 
           $data = $request->validate([
             'nombre_tipo' => 'required'
         ]);
-        $vuelo->nombre_tipo = $data['nombre_tipo'];
-        $vuelo->updated_at = now();
-        $vuelo->save();
+        $tipo->nombre_tipo = $data['nombre_tipo'];
+        $tipo->updated_at = now();
+        $tipo->save();
         return redirect()->route('admin.tipo.show');
 
     }

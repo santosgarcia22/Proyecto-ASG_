@@ -12,12 +12,17 @@ use App\Http\Controllers\Frontend\AccesoController;
 use App\Http\Controllers\AccesoFrontendController;
 use App\Http\Controllers\VueloFrontendController;
 use App\Http\Controllers\tipoController;
+use App\Http\Controllers\ChatFlowController;
 
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 // --- LOGIN ---
 Route::get('/', [LoginController::class,'index'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+//CHATBOT
+Route::get('/chatbot/opciones', [ChatFlowController::class, 'getOpciones']);
+Route::get('/chatbot/mensaje-final/{id}', [ChatFlowController::class, 'getMensajeFinal']);
 
 
 // --- CONTROL WEB ---

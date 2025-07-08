@@ -17,13 +17,13 @@ class usuariospAppSeeder extends Seeder
     {
         //
         $data = array([
-            'usuario' => 'Prueba',
+            'usuario' => 'Prueba3',
             'created_at'=>Carbon::now(),
-            'email' => 'prueba@gmail.com',
+            'email' => 'prueba3@gmail.com',
             'created_at'=>Carbon::now(),
-            'password' => hash::make('1234'),
+            'password' => hash::make('12345'),
             'created_at'=>Carbon::now(),
-            'nombre_completo' => 'Prueba app',
+            'nombre_completo' => 'Prueba app 3',
             'created_at'=>Carbon::now()
         ]);
 
