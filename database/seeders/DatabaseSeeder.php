@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesSeeder::class);
         $this->call(UsuariosSeeder::class);
+        $this->call(usuariospAppSeeder::class);
+        $this->call(ChatbotFlowsSeeder::class);
     }
 }

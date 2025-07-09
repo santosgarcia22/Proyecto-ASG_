@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\acceso;
 use Carbon\Carbon;
 use App\Models\vuelo;
-use App\Models\Tipos;
+use App\Models\tipos;
+use App\Models\tipo;
 
 class AccesoFrontendController extends Controller
 {
@@ -120,8 +121,9 @@ class AccesoFrontendController extends Controller
     {
 
         $vuelo = vuelo::all();
+        $tipos = tipo::all();
 
-        return view('/acceso/update')->with(['acceso' => $acceso, 'vuelo' => $vuelo]);
+        return view('/acceso/update')->with(['acceso' => $acceso, 'vuelo' => $vuelo, 'tipos' => $tipos]);
     }
 
 
@@ -130,6 +132,7 @@ class AccesoFrontendController extends Controller
      */
 public function update(Request $request, acceso $acceso)
 {
+
     $data = $request->validate([
         'nombre' => 'required',
         'tipo' => 'required',
@@ -142,14 +145,11 @@ public function update(Request $request, acceso $acceso)
         // Si actualizas archivo, valida archivos
         'objetos' => 'nullable|file|image|max:2048'
     ]);
-
     // Convertir fechas de datetime-local a formato MySQL
     $data['ingreso'] = Carbon::parse($data['ingreso'])->format('Y-m-d H:i:s');
-
     // Puede que salida y Sicronizacion sean opcionales
     $data['salida'] = $data['salida'] ? Carbon::parse($data['salida'])->format('Y-m-d H:i:s') : null;
     $data['Sicronizacion'] = $data['Sicronizacion'] ? Carbon::parse($data['Sicronizacion'])->format('Y-m-d H:i:s') : null;
-
     // Actualizar atributos
     $acceso->nombre = $data['nombre'];
     $acceso->tipo = $data['tipo'];
@@ -159,7 +159,6 @@ public function update(Request $request, acceso $acceso)
     $acceso->Sicronizacion = $data['Sicronizacion'];
     $acceso->id = $data['id'];
     $acceso->vuelo = $data['vuelo'];
-
     // Manejo de archivo (si se sube)
     if ($request->hasFile('objetos')) {
         $file = $request->file('objetos');
@@ -167,11 +166,8 @@ public function update(Request $request, acceso $acceso)
         $file->storeAs('public/objetos', $filename);
         $acceso->objetos = 'objetos/'.$filename;
     }
-
     $acceso->updated_at = now();
-
     $acceso->save();
-
     return redirect()->route('admin.accesos.show');
 }
 

@@ -33,7 +33,15 @@ table {
                         </div>
                         <div class="col-md-6">
                             <label for="tipo" class="form-label">Tipo</label>
-                            <input type="text" name="tipo" class="form-control" value="{{ $acceso->tipo }}" required>
+                            <select name="tipo" id="tipo" class="form-control" required>
+                                <option value="">Seleccione un tipo...</option>
+                                @foreach($tipos as $tipo)
+                                <option value="{{ $tipo->id_tipo }}"
+                                    {{ $acceso->tipo == $tipo->id_tipo ? 'selected' : '' }}>
+                                    {{ $tipo->nombre_tipo }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -71,7 +79,8 @@ table {
 
                     <div class="mb-3">
                         <label class="form-label">Objetos (imagen)</label>
-                        <input type="file" name="objetos" class="form-control"  accept="image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/tiff, image/heic"
+                        <input type="file" name="objetos" class="form-control"
+                            accept="image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/tiff, image/heic"
                             required>
                         <small class="text-muted">Archivo actual: {{ $acceso->objetos }}</small>
                     </div>
@@ -84,8 +93,7 @@ table {
                         </option>
                         @endforeach
                     </select>
-
-
+<br>
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>

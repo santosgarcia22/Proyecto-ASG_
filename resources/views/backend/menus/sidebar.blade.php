@@ -79,6 +79,9 @@
 </style>
 <!-- en la clase elevation-0 es para ponerle una especie de sobra al la imagen -->
 
+
+
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('admin.home') }}" target="frameprincipal"
         class="brand-link d-flex align-items-center justify-content-center">
