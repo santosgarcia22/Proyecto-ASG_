@@ -69,6 +69,30 @@
 
     <div class="container-fluid mt-3">
 
+
+        @if(request('busqueda') || request('numero_vuelo'))
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+            <div id="toastFiltro" class="toast align-items-center text-bg-info border-0 show" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        @if(request('busqueda'))
+                        <i class="bi bi-search"></i> Búsqueda: <b>{{ request('busqueda') }}</b>
+                        @endif
+                        @if(request('numero_vuelo'))
+                        <i class="bi bi-airplane"></i> Vuelo: <b>{{ request('numero_vuelo') }}</b>
+                        @endif
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        onclick="window.location='{{ route('admin.accesos.index') }}'"></button>
+                </div>
+            </div>
+        </div>
+        @endif
+
+
+
+
         @if ($errors->has('objetos'))
         <div class="alert alert-danger">
             {{ $errors->first('objetos') }}
@@ -116,7 +140,7 @@
 
                         <select name="numero_vuelo" class="form-select form-select-sm" style="max-width: 170px;"
                             onchange="this.form.submit()">
-                            <option value="">-- Todos los vuelos --</option>
+                            <option value="">✈️-- Todos los vuelos --</option>
                             @foreach($vuelos as $vuelo)
                             <option value="{{ $vuelo->numero_vuelo }}"
                                 {{ request('numero_vuelo') == $vuelo->numero_vuelo ? 'selected' : '' }}>

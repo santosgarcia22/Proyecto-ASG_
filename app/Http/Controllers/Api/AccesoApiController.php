@@ -9,8 +9,6 @@ use App\Models\acceso;
 
 class AccesoApiController extends Controller
 {
-    //
-
     public function index()
     {
         return response()->json(acceso::all());
@@ -25,8 +23,6 @@ class AccesoApiController extends Controller
             return response()->json(['message' => 'Acceso no encontrado'], 404);
         }
     }
-
-
     public function store(Request $request)
     {
         $data = $request->all();
@@ -46,7 +42,6 @@ class AccesoApiController extends Controller
             $data['objetos'] = 'storage/objetos/' . $nombreArchivo; // ruta para mostrar desde la web
             unset($data['imagen_base64']);
         }
-
         // Asignar campos fijos o dummy si faltan
         $data['tipo'] = $request->tipo ?? 1;
         $data['posicion'] = $request->posicion ?? 'N/A';

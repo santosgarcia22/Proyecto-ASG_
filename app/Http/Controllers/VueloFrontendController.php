@@ -23,7 +23,10 @@ class VueloFrontendController extends Controller
          $vuelo = vuelo::select(
            "vuelo.id_vuelo",
            "vuelo.fecha",
-           "vuelo.numero_vuelo"
+           "vuelo.numero_vuelo",
+           "vuelo.matricula",
+           "vuelo.destino",
+           "vuelo.origen"
          );
 
 
@@ -64,7 +67,10 @@ class VueloFrontendController extends Controller
 
         $data = request()->validate([
             'fecha'=>'required',
-            'numero_vuelo'=>'required'
+            'numero_vuelo'=>'required',
+            'matricula'=>'required',
+            'destino'=>'required',
+            'origen'=>'required'
         ]);
 
         vuelo::create($data);
@@ -102,11 +108,17 @@ class VueloFrontendController extends Controller
         //
         $data = $request->validate([
             'fecha' => 'required',
-            'numero_vuelo' => 'required'
+            'numero_vuelo' => 'required',
+            'matricula' => 'required',
+            'destino' => 'required',
+            'origen' => 'required'
         ]);
         $data['fecha']= Carbon::parse($data['fecha'])->format('Y-m-d H:i:s');
         $vuelo->fecha = $data['fecha'];
         $vuelo->numero_vuelo = $data['numero_vuelo'];
+        $vuelo->matricula = $data['matricula'];
+        $vuelo->destino = $data['destino'];
+        $vuelo->origen = $data['origen'];
         $vuelo->updated_at = now();
         $vuelo->save();
         return redirect()->route('admin.vuelo.show');

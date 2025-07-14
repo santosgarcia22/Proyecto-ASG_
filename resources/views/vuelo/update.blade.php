@@ -37,17 +37,37 @@ table {
                             @endif
                         </div>
 
-
-
-
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Matricula</label>
+                            <input type="text" name="matricula" id="matricula" class="form-control"
+                                value="{{$vuelo->matricula}}" required>
+                        </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label class="form-label">Fecha del vuelo</label>
                             <input type="datetime-local" name="fecha" class="form-control"
                                 value="{{ $vuelo->fecha ? \Carbon\Carbon::parse($vuelo->fecha)->format('Y-m-d\TH:i') : '' }}">
                         </div>
+
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Destino</label>
+                            <input type="text" name="destino" id="destino" class="form-control"
+                                value="{{ $vuelo->destino }}" required>
+                        </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Origin</label>
+                            <input type="text" name="origen" id="origen" class="form-control"
+                            value="{{ $vuelo->origen }}" required>
+                        </div>
+
+                    </div>
+
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                         <a href="{{ route('admin.vuelo.show') }}" class="btn btn-secondary">Cancelar</a>

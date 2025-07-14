@@ -191,6 +191,13 @@
                                 <p>Usuario</p>
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a href="{{ route('admin.usuariosapp.index') }}" target="frameprincipal" class="nav-link"
+                                onclick="guardarUltimaVista(event, this.href)">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Usuario App</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 @endcan

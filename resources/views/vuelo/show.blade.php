@@ -119,6 +119,9 @@
                                 <th style="width: 8%">#</th>
                                 <th style="width: 8%">Numero de vuelo</th>
                                 <th style="width: 8%">fecha</th>
+                                <th style="width: 8%">Matricula</th>
+                                <th style="width: 8%">Destino</th>
+                                <th style="width: 8%">Origen</th>
                                 <th style="width: 8%">Opciones</th>
                             </tr>
                         </thead>
@@ -128,6 +131,9 @@
                                 <td>{{$item->id_vuelo}}</td>
                                 <td>{{$item->numero_vuelo}}</td>
                                 <td>{{$item->fecha}}</td>
+                                <td>{{$item->matricula}}</td>
+                                <td>{{$item->destino}}</td>
+                                <td>{{$item->origen}}</td>
                                 <td>
                                     <a href="{{ route('admin.vuelo.edit', $item->id_vuelo )}}"
                                         class="btn btn-sm btn-primary me-1">

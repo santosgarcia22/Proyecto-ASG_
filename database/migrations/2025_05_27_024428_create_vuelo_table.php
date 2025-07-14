@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id('id_vuelo');
             $table->string('fecha');
             $table->string('numero_vuelo');
+            $table->string('matricula');
+            $table->string('destino');
+            $table->string('origen');
             $table->timestamps();
         });
     }
