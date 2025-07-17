@@ -22,7 +22,13 @@ Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 //ruta de usuarios app
-Route::get('/usuariosapp', [UsuarioAppController::class, 'index'])->name('admin.usuariosapp.index');
+Route::prefix('admin/usuariosapp')->group(function () {
+    Route::get('/', [UsuarioAppController::class, 'index'])->name('admin.usuariosapp.index');
+    Route::get('admin/usuariosapp/tabla', [UsuarioAppController::class, 'tabla']);
+    Route::post('/nuevo', [UsuarioAppController::class, 'nuevo']);
+    Route::post('/info', [UsuarioAppController::class, 'info']);
+    Route::post('/editar', [UsuarioAppController::class, 'editar']);
+});
 
 
 //CHATBOT

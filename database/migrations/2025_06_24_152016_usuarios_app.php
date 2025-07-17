@@ -18,6 +18,7 @@ return new class extends Migration
         $table->string('email')->nullable();
         $table->string('password');
         $table->string('nombre_completo')->nullable();
+        $table->boolean('activo')->default(true);
         $table->timestamps();
     });
 
